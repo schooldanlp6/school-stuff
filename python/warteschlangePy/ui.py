@@ -16,16 +16,16 @@ from PyQt6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PyQt6.QtWidgets import (QApplication, QHBoxLayout, QMainWindow, QMenuBar,
-    QSizePolicy, QStatusBar, QLineEdit, QToolButton, QVBoxLayout, QWidget, QTextBrowser)
+    QSizePolicy, QStatusBar, QLineEdit, QToolButton, QVBoxLayout, QWidget, QTextBrowser, QPushButton)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(800, 600)
-#        MainWindow.setWindowTitle("Eww")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
+        
         self.horizontalLayoutWidget = QWidget(self.centralwidget)
         self.horizontalLayoutWidget.setObjectName(u"horizontalLayoutWidget")
         self.horizontalLayoutWidget.setGeometry(QRect(10, 10, 441, 302))
@@ -34,7 +34,6 @@ class Ui_MainWindow(object):
         self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2 = QHBoxLayout()
         self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
-
         self.horizontalLayout.addLayout(self.horizontalLayout_2)
 
         self.verticalLayout = QVBoxLayout()
@@ -114,12 +113,19 @@ class Ui_MainWindow(object):
         self.retranslateUi(MainWindow)
 
         QMetaObject.connectSlotsByName(MainWindow)
-    # setupUi
 
+        # Add Play Button (Dynamic Play/Stop)
+        self.playStopButton = QPushButton(self.horizontalLayoutWidget)
+        self.playStopButton.setObjectName(u"playStopButton")
+        self.playStopButton.setText(QCoreApplication.translate("MainWindow", u"Play", None))  # Set initial text to "Play"
+        self.verticalLayout_2.addWidget(self.playStopButton)
+
+        # Connect Play/Stop button to handler function
+        #self.playStopButton.clicked.connect(self.togglePlayStop)
+        
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"Lied GUI", None))
         self.toolButton.setText(QCoreApplication.translate("MainWindow", u"Lied Hinzuf\u00fcgen", None))
         self.toolButton_2.setText(QCoreApplication.translate("MainWindow", u"N\u00e4chstes Lied", None))
         self.toolButton_4.setText(QCoreApplication.translate("MainWindow", u"Warteschlange Leeren", None))
         self.toolButton_3.setText(QCoreApplication.translate("MainWindow", u"Warteschlange Zeigen", None))
-    # retranslateUi

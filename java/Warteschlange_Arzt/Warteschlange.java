@@ -76,6 +76,17 @@ class Warteschlange
         }
     }
 
+    Knoten KnotenGeben(){
+        if (anfang.NachfolgerGeben()==null){
+            return anfang;
+        }
+        else{
+            Knoten nachfolger = anfang.NachfolgerGeben()
+            return nachfolger;
+            KnotenGeben();
+        }
+    }
+
 /* public static void main(String[] args){
         Warteschlange w1 = new Warteschlange();
         Datenelement d1 = new Patient("Name");

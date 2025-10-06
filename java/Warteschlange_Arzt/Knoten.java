@@ -74,4 +74,12 @@ class Knoten
     {
         daten.InformationAusgeben();
     }
+
+    int LaengeGeben(){
+        if (nachfolger != null){
+            return 1 + nachfolger.LaengeGeben();
+        }else{
+            return 1;
+        }
+    }
 }

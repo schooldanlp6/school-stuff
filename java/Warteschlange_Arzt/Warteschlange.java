@@ -1,4 +1,3 @@
-
 /**
  * Beschreibung der Warteschlange
  * 
@@ -40,27 +39,30 @@ class Warteschlange
      */
     Datenelement Entfernen()
     {
-        return null;
-        // Diese Lösung muss überarbeitet werden, weil die Referenz auf das Ende
-        // nicht mehr vorhanden ist. 
-        // Knoten k = anfang;
-        // if (anfang != null)
-        // {
-            // if (anfang == ende)
-            // {
-                // anfang = null;
-                // ende = null;
-            // }
-            // else
-            // {
-                // anfang=anfang.NachfolgerGeben();
-            // }
-            // return k.DatenelementGeben();
-        // }
-        // else
-        // {
-            // return null;
-        // }
+        if (anfang != null)
+        {
+            if (anfang != null)
+            {
+                anfang = anfang.NachfolgerGeben();
+                return anfang.DatenelementGeben();
+            }
+            else
+            {
+                try {
+                    anfang=anfang.NachfolgerGeben();                    
+                } catch (Exception e) {
+                    return null;
+                }
+            }
+        }
+        return anfang.DatenelementGeben();
+    }
+
+    int WartschlangenLaengeGeben(){
+        if (anfang!=null){
+            return anfang.LaengeGeben();
+        }
+        return 0;
     }
 
     /**
@@ -72,5 +74,12 @@ class Warteschlange
         {
             anfang.InformationAusgeben();
         }
+    }
+
+ public static void main(String[] args){
+        Warteschlange w1 = new Warteschlange();
+        Datenelement d1 = new Patient("Name");
+        w1.HintenEinfügen(d1);
+
     }
 }

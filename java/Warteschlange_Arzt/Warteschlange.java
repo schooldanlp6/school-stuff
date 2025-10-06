@@ -76,10 +76,11 @@ class Warteschlange
         }
     }
 
- public static void main(String[] args){
+/* public static void main(String[] args){
         Warteschlange w1 = new Warteschlange();
         Datenelement d1 = new Patient("Name");
         w1.HintenEinfügen(d1);
 
     }
+*/
 }

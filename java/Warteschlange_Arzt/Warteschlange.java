@@ -87,37 +87,11 @@ class Warteschlange
         }
     }
 
-    Knoten PatientAufrufen(String s){
+    String PatientAufrufen(String s){
         if (anfang!=null){
-            if(anfang.SearchEval(s)){
-                return anfang;
-            }else{
-                Boolean eval = false;
-                Knoten some;
-                try {
-                    some = anfang.NachfolgerGeben();
-                    eval = some.SearchEval(s);
-                } catch (Exception e) {
-                    eval = true;
-                    return null;
-                }
-                while(eval==false){
-                    try {
-                        some = some.NachfolgerGeben();
-                        eval = some.SearchEval(s);
-                    }catch (Exception e) {
-                        System.out.println("No Name Named " + s );
-                        return null;
-                    }
-                    if (eval==true){
-                        return some;
-                    }
-                }
-            }
-        }else{
-            System.out.println("empty");
-            return null;
+            anfang.SearchEval(s);
         }
+        return null;
     }
 
 /* public static void main(String[] args){

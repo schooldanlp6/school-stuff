@@ -30,8 +30,16 @@ class Patient implements Datenelement
      * Gibt den Namen des Patienten aus
      * @return Name des Patienten
      */
-    String NameGeben()
+    public String NameGeben()
     {
         return name;
+    }
+
+    void NameSetzen(String name){
+        this.name = name;
+    }
+
+    public void NameSetzen() {
+        throw new UnsupportedOperationException("Unimplemented method 'NameSetzen'");
     }
 }

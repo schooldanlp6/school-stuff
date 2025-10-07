@@ -1,102 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
 
-// Datenelement.java
-interface Datenelement {
-    String toString();
-}
-
-// Patient.java
-class Patient implements Datenelement {
-    private String name;
-
-    public Patient(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return name;
-    }
-}
-
-// Knoten.java
-class Knoten {
-    private Datenelement daten;
-    private Knoten nachfolger;
-
-    public Knoten(Datenelement daten) {
-        this.daten = daten;
-        this.nachfolger = null;
-    }
-
-    public void HintenEinfügen(Datenelement neu) {
-        if (nachfolger == null) {
-            nachfolger = new Knoten(neu);
-        } else {
-            nachfolger.HintenEinfügen(neu);
-        }
-    }
-
-    public Knoten NachfolgerGeben() {
-        return nachfolger;
-    }
-
-    public Datenelement DatenelementGeben() {
-        return daten;
-    }
-
-    public int LaengeGeben() {
-        if (nachfolger == null) return 1;
-        return 1 + nachfolger.LaengeGeben();
-    }
-
-    public void InformationAusgeben() {
-        System.out.println(daten);
-        if (nachfolger != null) nachfolger.InformationAusgeben();
-    }
-}
-
-// Warteschlange.java
-class Warteschlange {
-    private Knoten anfang;
-
-    Warteschlange() {
-        anfang = null;
-    }
-
-    void HintenEinfügen(Datenelement dneu) {
-        if (anfang != null) {
-            anfang.HintenEinfügen(dneu);
-        } else {
-            anfang = new Knoten(dneu);
-        }
-    }
-
-    Datenelement Entfernen() {
-        if (anfang == null) {
-            return null;
-        }
-        Datenelement d = anfang.DatenelementGeben();
-        anfang = anfang.NachfolgerGeben();
-        return d;
-    }
-
-    int WartschlangenLaengeGeben() {
-        return (anfang != null) ? anfang.LaengeGeben() : 0;
-    }
-
-    void InformationAusgeben() {
-        if (anfang != null) {
-            anfang.InformationAusgeben();
-        }
-    }
-}
-
 // GUI.java
 public class GUI extends Frame {
 
-    private Warteschlange warteschlange;
+    private Warteschlange warteschlange = new Warteschlange();
     private double scale = 1.5; // Skalierungsfaktor, 1.5 = 150%
     private Font scaledFont;
 
@@ -111,8 +19,10 @@ public class GUI extends Frame {
         // Eingabezeile
         Panel eingabePanel = new Panel(new FlowLayout());
         Label label = new Label("Patient:");
+        Label Suche = new Label("Suche:");
         label.setFont(scaledFont);
         TextField eingabeFeld = new TextField((int)(20 * scale));
+        TextField suchFeld = new TextField((int)(20 * scale));
         eingabeFeld.setFont(scaledFont);
 
         Button hinzufuegenButton = new Button("Hinzufügen");
@@ -131,12 +41,22 @@ public class GUI extends Frame {
         anzeigenKnoten.setFont(scaledFont);
         anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
 
+        Button sucheButton = new Button("Suchen und Aufrufen");
+        anzeigenKnoten.setFont(scaledFont);
+        anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
+
+        //Main func
         eingabePanel.add(label);
         eingabePanel.add(eingabeFeld);
         eingabePanel.add(hinzufuegenButton);
         eingabePanel.add(entfernenButton);
         eingabePanel.add(anzeigenButton);
         eingabePanel.add(anzeigenKnoten);
+        //Suche
+        eingabePanel.add(Suche);
+        eingabePanel.add(suchFeld);
+        eingabePanel.add(sucheButton);
+        //init
         add(eingabePanel, BorderLayout.NORTH);
 
         // Ausgabe-Bereich
@@ -169,9 +89,22 @@ public class GUI extends Frame {
             warteschlange.InformationAusgeben();
         });
 
-        anzeigenKnoten.addActionListener(e -> {
-            ausgabeBereich.append("Patienten: "+ warteschlange.DatenelementGeben(warteschlange.KnotenGeben));
+        //anzeigenKnoten.addActionListener(e -> {
+        //    ausgabeBereich.append("Patienten: "+ warteschlange.DatenelementGeben(warteschlange.KnotenGeben));
+        //});
+
+        sucheButton.addActionListener(e -> {
+            String suchName = suchFeld.getText().trim();
+            if (!suchName.isEmpty()) {
+                // Call PatientAufrufen to search and remove patient
+                warteschlange.PatientAufrufen(suchName);
+                ausgabeBereich.append("Patient " + suchName + " wurde aufgerufen und entfernt (falls gefunden).\n");
+                suchFeld.setText(""); // Clear the search field
+            } else {
+                ausgabeBereich.append("Bitte einen Namen eingeben.\n");
+            }
         });
+
 
         // Fenster schließen
         addWindowListener(new WindowAdapter() {

@@ -82,4 +82,13 @@ class Knoten
             return 1;
         }
     }
+
+    Boolean SearchEval(String s){
+        if(daten.NameGeben().equals(s)){
+            return true;
+        }else{
+            SearchEval(s);
+        }
+        return false;
+    }
 }

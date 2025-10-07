@@ -9,5 +9,7 @@ interface Datenelement
 {
     /** Methode zur Ausgabe von Information über das Datenelement */
     void InformationAusgeben();
+    void NameSetzen();
+    String NameGeben();
     
 }

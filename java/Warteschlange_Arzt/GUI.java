@@ -79,6 +79,7 @@ public class GUI extends Frame {
             Datenelement d = warteschlange.Entfernen();
             if (d != null) {
                 ausgabeBereich.append("Entfernt: " + d + "\n");
+                ausgabeBereich.append("Patient: " + d.NameGeben() + " bitte ins Zimmer kommen!" + "\n");
             } else {
                 ausgabeBereich.append("Warteschlange ist leer!\n");
             }
@@ -98,7 +99,7 @@ public class GUI extends Frame {
             if (!suchName.isEmpty()) {
                 // Call PatientAufrufen to search and remove patient
                 Boolean res = warteschlange.PatientAufrufen(suchName);
-                ausgabeBereich.append("Patient " + suchName + res + "\n");
+                ausgabeBereich.append("Patient " + suchName + " existiert?: " + res + "\n");
                 suchFeld.setText(""); // Clear the search field
             } else {
                 ausgabeBereich.append("Bitte einen Namen eingeben.\n");

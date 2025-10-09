@@ -41,7 +41,7 @@ class Warteschlange
     {
         if (anfang != null)
         {
-            if (anfang != null)
+            if (anfang.NachfolgerGeben() != null)
             {
                 anfang = anfang.NachfolgerGeben();
                 return anfang.DatenelementGeben();
@@ -49,9 +49,11 @@ class Warteschlange
             else
             {
                 try {
-                    anfang=anfang.NachfolgerGeben();                    
+                    Knoten a = anfang;
+                    anfang=anfang.NachfolgerGeben();
+                    return a.DatenelementGeben();                    
                 } catch (Exception e) {
-                    return null;
+                    return anfang.DatenelementGeben();
                 }
             }
         }

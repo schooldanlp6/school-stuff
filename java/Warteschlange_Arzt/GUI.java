@@ -97,8 +97,8 @@ public class GUI extends Frame {
             String suchName = suchFeld.getText().trim();
             if (!suchName.isEmpty()) {
                 // Call PatientAufrufen to search and remove patient
-                warteschlange.PatientAufrufen(suchName);
-                ausgabeBereich.append("Patient " + suchName + " wurde aufgerufen und entfernt (falls gefunden).\n");
+                Boolean res = warteschlange.PatientAufrufen(suchName);
+                ausgabeBereich.append("Patient " + suchName + res + "\n");
                 suchFeld.setText(""); // Clear the search field
             } else {
                 ausgabeBereich.append("Bitte einen Namen eingeben.\n");

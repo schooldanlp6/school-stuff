@@ -87,9 +87,11 @@ class Warteschlange
         }
     }
 
-    String PatientAufrufen(String s){
+    Boolean PatientAufrufen(String s){
         if (anfang!=null){
-            anfang.SearchEval(s);
+            Boolean res;
+            res = anfang.SearchEval(s);
+            return res;
         }
         return null;
     }

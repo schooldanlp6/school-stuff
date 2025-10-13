@@ -22,6 +22,29 @@ class Knoten
         nachfolger  = null;
     }
 
+    Knoten VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
+    {
+        if(daten==d_vergleich){
+            Knoten k = new Knoten(dneu);
+            Knoten nf = nachfolger;
+            nachfolger = k;
+            return nf;
+        }else{
+            return VorEinfügen(dneu, d_vergleich);
+        }
+    }
+
+    void NachEinfügen (Datenelement dneu, Datenelement d_vergleich){
+        if (dneu==d_vergleich) {
+            Knoten knoten;
+            knoten = new Knoten(dneu);
+            knoten.nachfolger=this.nachfolger;
+            this.nachfolger = knoten;
+        }else{
+            this.nachfolger.NachEinfügen(dneu, d_vergleich);
+        }
+    }
+
     /**
     * Fügt ein Datenelement am Ende der Liste ein
     * @param dneu neues Datenelement
@@ -39,7 +62,7 @@ class Knoten
             nachfolger = kneu;
         }
     }
-    
+
     /**
      * Nachfolger des Knoten setzen
      * @param nf neuer Nachfolger

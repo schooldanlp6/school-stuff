@@ -17,6 +17,32 @@ class Warteschlange
         anfang = null; 
     }
 
+    void VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
+    {
+        if (anfang != null){
+            if(anfang.DatenelementGeben()==d_vergleich){
+                Knoten knoten = anfang.VorEinfügen(dneu, d_vergleich);
+                Knoten k = anfang;
+                anfang = knoten;
+                anfang.NachfolgerSetzen(k);
+            }
+            else{
+                anfang.VorEinfügen(dneu, d_vergleich);
+            }
+        }else{
+            anfang = new Knoten(dneu);
+        }
+    }
+
+    void NachEinfügen(Datenelement dneu, Datenelement d_vergleich)
+    {
+        if (anfang != null) {
+            anfang.NachEinfügen(dneu, d_vergleich);
+        }else{
+            anfang = new Knoten(dneu);
+        }
+    }
+
     /**
      * Fügt ein neues Datenelement am Ende der Warteschlange ein.
      * @param dNeu neues Datenelement

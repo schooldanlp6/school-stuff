@@ -22,15 +22,17 @@ class Knoten
         nachfolger  = null;
     }
 
+    void SortiertEinfügen(){}
+
     Knoten VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
-        if(daten==d_vergleich){
+        if (daten==d_vergleich){
             Knoten k = new Knoten(dneu);
-            Knoten nf = nachfolger;
-            nachfolger = k;
-            return nf;
+            k.NachfolgerSetzen(this);
+            return k;
         }else{
-            return VorEinfügen(dneu, d_vergleich);
+            nachfolger = nachfolger.VorEinfügen(dneu, d_vergleich);
+            return this;
         }
     }
 

@@ -20,16 +20,9 @@ class Warteschlange
     void VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
         if (anfang != null){
-            if(anfang.DatenelementGeben()==d_vergleich){
-                Knoten knoten = anfang.VorEinfügen(dneu, d_vergleich);
-                Knoten k = anfang;
-                anfang = knoten;
-                anfang.NachfolgerSetzen(k);
-            }
-            else{
-                anfang.VorEinfügen(dneu, d_vergleich);
-            }
-        }else{
+            anfang = anfang.VorEinfügen(dneu, d_vergleich);
+        }
+        else{
             anfang = new Knoten(dneu);
         }
     }

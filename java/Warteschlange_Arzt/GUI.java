@@ -20,9 +20,13 @@ public class GUI extends Frame {
         Panel eingabePanel = new Panel(new FlowLayout());
         Label label = new Label("Patient:");
         Label Suche = new Label("Suche:");
+        Label Einfuegen = new Label("EinfügenVor:");
         label.setFont(scaledFont);
+        Suche.setFont(scaledFont);
+        Einfuegen.setFont(scaledFont);
         TextField eingabeFeld = new TextField((int)(20 * scale));
         TextField suchFeld = new TextField((int)(20 * scale));
+        TextField einfuegeFeld = new TextField((int)(20 * scale));
         eingabeFeld.setFont(scaledFont);
 
         Button hinzufuegenButton = new Button("Hinzufügen");
@@ -45,6 +49,11 @@ public class GUI extends Frame {
         anzeigenKnoten.setFont(scaledFont);
         anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
 
+        Button EinfuegenNach = new Button("Suchen und Aufrufen");
+        anzeigenKnoten.setFont(scaledFont);
+        anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
+
+
         //Main func
         eingabePanel.add(label);
         eingabePanel.add(eingabeFeld);
@@ -56,6 +65,10 @@ public class GUI extends Frame {
         eingabePanel.add(Suche);
         eingabePanel.add(suchFeld);
         eingabePanel.add(sucheButton);
+        //EinfügenNach
+        eingabePanel.add(EinfuegenNach);
+        eingabePanel.add(Einfuegen);
+        eingabePanel.add(einfuegeFeld);
         //init
         add(eingabePanel, BorderLayout.NORTH);
 
@@ -95,6 +108,19 @@ public class GUI extends Frame {
         //});
 
         sucheButton.addActionListener(e -> {
+            String suchName = suchFeld.getText().trim();
+            if (!suchName.isEmpty()) {
+                // Call PatientAufrufen to search and remove patient
+                Boolean res = warteschlange.PatientAufrufen(suchName);
+                ausgabeBereich.append("Patient " + suchName + " existiert?: " + res + "\n");
+                suchFeld.setText(""); // Clear the search field
+            } else {
+                ausgabeBereich.append("Bitte einen Namen eingeben.\n");
+            }
+        });
+
+        
+        EinfuegenNach.addActionListener(e -> {
             String suchName = suchFeld.getText().trim();
             if (!suchName.isEmpty()) {
                 // Call PatientAufrufen to search and remove patient

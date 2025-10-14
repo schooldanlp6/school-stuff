@@ -17,6 +17,16 @@ class Warteschlange
         anfang = null; 
     }
 
+    
+    Datenelement NameToDatenelement(String s){
+        if(anfang!=null){
+            Datenelement d = anfang.NameToDatenelement(s);
+            return d;
+        }else{
+            return null;
+        }
+    }
+
     void VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
         if (anfang != null){
@@ -62,8 +72,9 @@ class Warteschlange
         {
             if (anfang.NachfolgerGeben() != null)
             {
+                Knoten a = anfang;
                 anfang = anfang.NachfolgerGeben();
-                return anfang.DatenelementGeben();
+                return a.DatenelementGeben();
             }
             else
             {
@@ -75,8 +86,9 @@ class Warteschlange
                     return anfang.DatenelementGeben();
                 }
             }
-        }
-        return anfang.DatenelementGeben();
+        }else{
+            return null;
+        } 
     }
 
     int WartschlangenLaengeGeben(){
@@ -95,6 +107,10 @@ class Warteschlange
         {
             anfang.InformationAusgeben();
         }
+    }
+
+    Knoten AnfangGeben(){
+        return anfang;
     }
 
     Knoten KnotenGeben(){

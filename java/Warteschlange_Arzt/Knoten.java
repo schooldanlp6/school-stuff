@@ -24,6 +24,21 @@ class Knoten
 
     void SortiertEinfügen(){}
 
+    Datenelement NameToDatenelement(String s){
+        String name = daten.NameGeben();
+        if (name.equals(s)){
+            return daten;
+        }else{
+            try{
+                return nachfolger.NameToDatenelement(s);
+            }
+            catch (Exception e) {
+                System.out.println("Reached End of Cue");
+                return null;
+            }
+        }
+    }
+
     Knoten VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
         if (daten==d_vergleich){

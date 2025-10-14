@@ -20,13 +20,14 @@ public class GUI extends Frame {
         Panel eingabePanel = new Panel(new FlowLayout());
         Label label = new Label("Patient:");
         Label Suche = new Label("Suche:");
-        Label Einfuegen = new Label("EinfügenVor:");
+        Label Einfuegen = new Label("EinfügenVor: name_vgl, name_neu:");
         label.setFont(scaledFont);
         Suche.setFont(scaledFont);
         Einfuegen.setFont(scaledFont);
         TextField eingabeFeld = new TextField((int)(20 * scale));
         TextField suchFeld = new TextField((int)(20 * scale));
         TextField einfuegeFeld = new TextField((int)(20 * scale));
+        TextField einfuegeFeld1 = new TextField((int)(20 * scale));
         eingabeFeld.setFont(scaledFont);
 
         Button hinzufuegenButton = new Button("Hinzufügen");
@@ -49,7 +50,7 @@ public class GUI extends Frame {
         anzeigenKnoten.setFont(scaledFont);
         anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
 
-        Button EinfuegenNach = new Button("Suchen und Aufrufen");
+        Button EinfuegenNach = new Button("Suchen und Einfügen");
         anzeigenKnoten.setFont(scaledFont);
         anzeigenKnoten.setPreferredSize(new Dimension((int)(120 * scale), (int)(40 * scale)));
 
@@ -66,9 +67,10 @@ public class GUI extends Frame {
         eingabePanel.add(suchFeld);
         eingabePanel.add(sucheButton);
         //EinfügenNach
-        eingabePanel.add(EinfuegenNach);
         eingabePanel.add(Einfuegen);
         eingabePanel.add(einfuegeFeld);
+        eingabePanel.add(einfuegeFeld1);
+        eingabePanel.add(EinfuegenNach);
         //init
         add(eingabePanel, BorderLayout.NORTH);
 
@@ -121,11 +123,14 @@ public class GUI extends Frame {
 
         
         EinfuegenNach.addActionListener(e -> {
-            String suchName = suchFeld.getText().trim();
-            if (!suchName.isEmpty()) {
+            String suchName = einfuegeFeld.getText().trim();
+            String suchName1 = einfuegeFeld1.getText().trim();
+            if (!suchName.isEmpty() & !suchName1.isEmpty()) {
                 // Call PatientAufrufen to search and remove patient
-                Boolean res = warteschlange.PatientAufrufen(suchName);
-                ausgabeBereich.append("Patient " + suchName + " existiert?: " + res + "\n");
+                Datenelement d1 = warteschlange.NameToDatenelement(suchName);
+                Datenelement d2 = new Patient(suchName1);
+                warteschlange.VorEinfügen(d2, d1);
+                ausgabeBereich.append("Patient " + suchName1 + "wurde (falls gefunden) vor" + suchName + "eingefügt!" + "\n");
                 suchFeld.setText(""); // Clear the search field
             } else {
                 ausgabeBereich.append("Bitte einen Namen eingeben.\n");

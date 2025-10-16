@@ -1,9 +1,11 @@
 /**
  * Beschreibung der Warteschlange
  * 
- * @author Klaus Reinold, Thomas Güntner
+ * @author Klaus Reinold, Thomas Güntner, Daniel Alvir
  * @version 1.0
  */
+import java.util.Arrays;
+
 class Warteschlange
 {
     /** erster Knoten der Warteschlange */
@@ -43,6 +45,16 @@ class Warteschlange
             anfang.NachEinfügen(dneu, d_vergleich);
         }else{
             anfang = new Knoten(dneu);
+        }
+    }
+
+    void SortiertEinfügen(Datenelement d){
+        int length = this.WartschlangenLaengeGeben();
+        Knoten[] data = new Knoten[length];
+        while (length > 0){
+            length++;
+            Knoten k = anfang.SortiertEinfügen(length, 0);
+            data[k.GetIndex()-1] = k;
         }
     }
 
@@ -96,6 +108,16 @@ class Warteschlange
             return anfang.LaengeGeben();
         }
         return 0;
+    }
+
+    String[] WarteschlangeAusgabeName(){
+        int laenge = WartschlangenLaengeGeben();
+        if (laenge!=0){
+
+            return anfang.WarteschlangeAusgabeName(laenge);
+            
+            k.DatenelementGeben().NameGeben();
+        }
     }
 
     /**

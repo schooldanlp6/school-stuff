@@ -12,6 +12,8 @@ class Knoten
     /** Verwaltung der Daten */
     private Datenelement daten;
 
+    private int index;
+
     /**
      * Konstruktor des Knoten
      * @param dNeu Datenelement
@@ -22,7 +24,13 @@ class Knoten
         nachfolger  = null;
     }
 
-    void SortiertEinfügen(){}
+    Knoten SortiertEinfügen(int length, int this_length ){
+        index = this_length + 1;
+        if(nachfolger!=null){
+            nachfolger.SortiertEinfügen(length, this_length);
+        }
+        return this;
+    }
 
     Datenelement NameToDatenelement(String s){
         String name = daten.NameGeben();
@@ -45,8 +53,11 @@ class Knoten
             Knoten k = new Knoten(dneu);
             k.NachfolgerSetzen(this);
             return k;
-        }else{
+        }else if(nachfolger!=null){
             nachfolger = nachfolger.VorEinfügen(dneu, d_vergleich);
+            return this;
+        }else{
+            nachfolger = new Knoten(dneu);
             return this;
         }
     }
@@ -105,6 +116,10 @@ class Knoten
     Datenelement DatenelementGeben()
     {
         return daten;
+    }
+
+    int GetIndex(){
+        return index;
     }
     
     /**

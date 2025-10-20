@@ -4,10 +4,10 @@
  * @author Klaus Reinold, Thomas Güntner
  * @version 1.0
  */
-class Knoten
+class Knoten extends Listenelement
 {
     /** Verwaltung des nachfolgenden Knoten in der Warteschlange. */
-    private Knoten nachfolger;
+    private Listenelement nachfolger;
     
     /** Verwaltung der Daten */
     private Datenelement daten;
@@ -21,10 +21,10 @@ class Knoten
     Knoten(Datenelement dneu)
     {
         daten = dneu;
-        nachfolger  = null;
+        nachfolger  = new Abschluss();
     }
 
-    Knoten SortiertEinfügen(int length, int this_length ){
+    Listenelement SortiertEinfügen(int length, int this_length ){
         index = this_length + 1;
         if(nachfolger!=null){
             nachfolger.SortiertEinfügen(length, this_length);
@@ -47,10 +47,10 @@ class Knoten
         }
     }
 
-    Knoten VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
+    Listenelement VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
         if (daten==d_vergleich){
-            Knoten k = new Knoten(dneu);
+            Listenelement k = new Knoten(dneu);
             k.NachfolgerSetzen(this);
             return k;
         }else if(nachfolger!=null){
@@ -77,18 +77,10 @@ class Knoten
     * Fügt ein Datenelement am Ende der Liste ein
     * @param dneu neues Datenelement
     */
-    void HintenEinfügen(Datenelement dneu)
+    Listenelement HintenEinfügen(Datenelement dneu)
     {
-        if(nachfolger != null)    
-        {
-            nachfolger.HintenEinfügen(dneu);
-        }
-        else
-        {
-            Knoten kneu;
-            kneu = new Knoten(dneu);
-            nachfolger = kneu;
-        }
+        nachfolger = nachfolger.HintenEinfügen(dneu);
+        return this;
     }
 
     /**
@@ -104,7 +96,7 @@ class Knoten
      * Gibt den Nachfolger des Knoten aus.
      * @return Nachfolger
      */
-    Knoten NachfolgerGeben()
+    Listenelement NachfolgerGeben()
     {
         return nachfolger;
     }

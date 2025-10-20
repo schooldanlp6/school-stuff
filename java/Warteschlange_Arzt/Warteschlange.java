@@ -9,14 +9,14 @@ import java.util.Arrays;
 class Warteschlange
 {
     /** erster Knoten der Warteschlange */
-    private Knoten anfang;
+    private Listenelement anfang;
 
     /**
      * Konstruktor der Warteschlange
      */
     Warteschlange()
     {
-        anfang = null; 
+        anfang = new Abschluss();
     }
 
     
@@ -50,10 +50,10 @@ class Warteschlange
 
     void SortiertEinfügen(Datenelement d){
         int length = this.WartschlangenLaengeGeben();
-        Knoten[] data = new Knoten[length];
+        Listenelement[] data = new Listenelement[length];
         while (length > 0){
             length++;
-            Knoten k = anfang.SortiertEinfügen(length, 0);
+            Listenelement k = anfang.SortiertEinfügen(length, 0);
             data[k.GetIndex()-1] = k;
         }
     }
@@ -64,14 +64,7 @@ class Warteschlange
      */
     void HintenEinfügen(Datenelement dneu)
     {
-        if (anfang != null)
-        {
-            anfang.HintenEinfügen(dneu);
-        }
-        else
-        {
-            anfang = new Knoten(dneu);
-        }
+        anfang = anfang.HintenEinfügen(dneu);
     }
 
     /**
@@ -84,7 +77,7 @@ class Warteschlange
         {
             if (anfang.NachfolgerGeben() != null)
             {
-                Knoten a = anfang;
+                Listenelement a = anfang;
                 anfang = anfang.NachfolgerGeben();
                 return a.DatenelementGeben();
             }
@@ -131,16 +124,16 @@ class Warteschlange
         }
     }
 
-    Knoten AnfangGeben(){
+    Listenelement AnfangGeben(){
         return anfang;
     }
 
-    Knoten KnotenGeben(){
+    Listenelement KnotenGeben(){
         if (anfang.NachfolgerGeben()==null){
             return anfang;
         }
         else{
-            Knoten nachfolger = anfang.NachfolgerGeben();
+            Listenelement nachfolger = anfang.NachfolgerGeben();
             return nachfolger;
             KnotenGeben();
         }

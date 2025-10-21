@@ -47,6 +47,15 @@ class Knoten extends Listenelement
         }
     }
 
+    Listenelement Entfernen(){
+        return nachfolger;
+    }
+
+    Listenelement EndeEntfernen(){
+        nachfolger = nachfolger.EndeEntfernen();
+        return nachfolger;
+    }
+
     Listenelement VorEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {
         if (daten==d_vergleich){
@@ -123,11 +132,7 @@ class Knoten extends Listenelement
     }
 
     int LaengeGeben(){
-        if (nachfolger != null){
-            return 1 + nachfolger.LaengeGeben();
-        }else{
-            return 1;
-        }
+        return 1 + nachfolger.LaengeGeben();
     }
 
     Boolean SearchEval(String s){

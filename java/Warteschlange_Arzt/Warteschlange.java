@@ -73,34 +73,17 @@ class Warteschlange
      */
     Datenelement Entfernen()
     {
-        if (anfang != null)
-        {
-            if (anfang.NachfolgerGeben() != null)
-            {
-                Listenelement a = anfang;
-                anfang = anfang.NachfolgerGeben();
-                return a.DatenelementGeben();
-            }
-            else
-            {
-                try {
-                    Knoten a = anfang;
-                    anfang=anfang.NachfolgerGeben();
-                    return a.DatenelementGeben();                    
-                } catch (Exception e) {
-                    return anfang.DatenelementGeben();
-                }
-            }
-        }else{
-            return null;
-        } 
+        Datenelement d = anfang.DatenelementGeben();
+        anfang = anfang.Entfernen();
+        return d;
+    }
+
+    Listenelement EndeEntfernen(){
+        return anfang.EndeEntfernen();
     }
 
     int WartschlangenLaengeGeben(){
-        if (anfang!=null){
-            return anfang.LaengeGeben();
-        }
-        return 0;
+        return anfang.LaengeGeben();
     }
 
     String[] WarteschlangeAusgabeName(){
@@ -118,10 +101,7 @@ class Warteschlange
      */
     void InformationAusgeben()
     {
-        if (anfang != null)
-        {
             anfang.InformationAusgeben();
-        }
     }
 
     Listenelement AnfangGeben(){

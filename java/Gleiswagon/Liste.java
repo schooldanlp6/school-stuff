@@ -6,7 +6,7 @@
  */
 import java.util.Arrays;
 
-class Warteschlange
+class Liste
 {
     /** erster Knoten der Warteschlange */
     private Listenelement anfang;
@@ -14,7 +14,7 @@ class Warteschlange
     /**
      * Konstruktor der Warteschlange
      */
-    Warteschlange()
+    Liste()
     {
         anfang = new Abschluss();
     }

@@ -38,6 +38,11 @@ class Liste
             anfang = new Knoten(dneu);
         }
     }
+    
+    Datenelement VorneEinfuegen(Datenelement dneu){
+        anfang = anfang.VorEinfügen(dneu, anfang.DatenelementGeben());
+        return anfang.DatenelementGeben();
+    }
 
     void NachEinfügen(Datenelement dneu, Datenelement d_vergleich)
     {

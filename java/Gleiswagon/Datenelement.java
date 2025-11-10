@@ -1,4 +1,3 @@
-
 /**
  * Interface für Datenelemente
  * 
@@ -8,8 +7,8 @@
 interface Datenelement
 {
     /** Methode zur Ausgabe von Information über das Datenelement */
-    void InformationAusgeben();
-    void NameSetzen();
+    String InformationAusgeben();
+    void NameSetzen(String name);
     String NameGeben();
     
 }

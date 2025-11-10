@@ -14,4 +14,8 @@ public class Abschluss extends Listenelement {
     Listenelement Entfernen(){
         return this;
     }
+
+    Listenelement VorEinfügen(Datenelement dneu, Datenelement d_vergleich) {
+        return new Knoten(dneu);
+    }
 }

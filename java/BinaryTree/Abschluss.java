@@ -1,5 +1,9 @@
-package java.BinaryTree;
+public class Abschluss extends TreeElement{
+    TreeElement Einfuegen(Datenelement d){
+        return (new Knoten(d));
+    }
 
-public class Abschluss {
-    
+    TreeElement Suchen(Datenelement d) {
+        return null;
+    }
 }

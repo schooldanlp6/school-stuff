@@ -1,10 +1,29 @@
-package java.BinaryTree;
-
-public class BinTree {
-    Knoten root;   
+public class BinTree{
+    TreeElement root;
+    static TreeElement abschluss;
 
     BinTree(){
-        root = new Abschluss;
+        root = new Abschluss();
+        abschluss = root;
     }
 
+    void Einfuegen(Datenelement d){
+        root = root.Einfuegen(d);
+    }
+    //oder Datenelement
+    String Suchen(Datenelement d_vgl){
+        if(root.Suchen(d_vgl) == null){
+            return "404 Not Found."; //try to catch it with String not found
+        }else{
+            return d_vgl.InformationenAusgeben();
+        }
+    }
+
+    void PrintTree(){
+        
+    }
+
+    static public TreeElement AbschlussGeben(){
+        return abschluss;
+    }
 }

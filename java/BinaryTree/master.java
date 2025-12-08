@@ -28,5 +28,6 @@ public class master {
     static void Insert(Datenelement d){
         t.Einfuegen(d);
         t.PrintTree();
+        System.out.println("Höhe: " + t.HoechsteHoeheBerechnen());
     }
 }

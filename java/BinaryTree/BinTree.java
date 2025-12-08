@@ -19,8 +19,12 @@ public class BinTree{
         }
     }
 
+    int HoechsteHoeheBerechnen(){
+        return root.HoechsteHoeheBerechnen(0);
+    }
+
     void PrintTree(){
-        System.out.println(".");
+        System.out.print(".");
         root.PrintTree(0);
     }
 

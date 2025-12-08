@@ -8,10 +8,14 @@ public class Abschluss extends TreeElement{
         return null;
     }
 
+    int HoechsteHoeheBerechnen(int hoehe){
+        return hoehe - 1;
+    }
+
     void PrintTree(int depth){
         int i = 0;
         System.out.print("|");
-        while (i < depth) {
+        while (i < depth + 1) {
             System.out.print("-");
             i++;
         }

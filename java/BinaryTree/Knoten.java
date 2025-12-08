@@ -6,6 +6,7 @@ public class Knoten extends TreeElement {
     Knoten(Datenelement d){
         data = d;
     }
+
     TreeElement Einfuegen(Datenelement d){
         if (data.SchluesselIstGleich(d.getUID())){
             return this;
@@ -18,11 +19,22 @@ public class Knoten extends TreeElement {
             return this;
         }
     }
-    private void treeeinfuegen(String seit, Datenelement d){
 
-    }
     TreeElement Suchen(Datenelement d) {
         return this;
         //if (this.d.getUID() == d)
+    }
+
+    void PrintTree(int depth){
+        depth++;
+        int i = 0;
+        System.out.print("|");
+        while (i < depth) {
+            System.out.print("-");
+            i++;
+        }
+        System.out.println(data.getUID());
+        lnf.PrintTree(depth);
+        lnr.PrintTree(depth);
     }
 }

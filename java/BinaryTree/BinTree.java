@@ -20,7 +20,8 @@ public class BinTree{
     }
 
     void PrintTree(){
-        
+        System.out.println(".");
+        root.PrintTree(0);
     }
 
     static public TreeElement AbschlussGeben(){

@@ -5,12 +5,21 @@ public interface Datenelement {
     }
     
     default boolean SchluesselIstGleich(int id){
-        return false;
+        if (id==uid){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
-    }
     default boolean SchluesselGroeßerAls(int id){
-        return false;
+        if (id>uid){
+            return true;
+        }else{
+            return false;
+        }
     }
+    
     default String InformationenAusgeben(){
         return "404 Not Found";
     }
